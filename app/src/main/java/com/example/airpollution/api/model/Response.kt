@@ -17,8 +17,6 @@ data class AirPollution(
             data class Item(
                 @SerializedName("districtName")
                 val districtName : String,
-                @SerializedName("issueVal")
-                val issueVal : String,
                 @SerializedName("issueTime")
                 val issueTime : String,
                 @SerializedName("issueDate")
@@ -28,17 +26,7 @@ data class AirPollution(
                 @SerializedName("issueGbn")
                 val issueGbn : String,
                 @SerializedName("itemCode")
-                val itemCode : String,
-                @SerializedName("clearVal")
-                val clearVal: String,
-                @SerializedName("sn")
-                val sn: String,
-                @SerializedName("dataDate")
-                val dataDate: String,
-                @SerializedName("clearDate")
-                val clearDate: String,
-                @SerializedName("clearTime")
-                val clearTime: String
+                val itemCode : String
             )
         }
     }
