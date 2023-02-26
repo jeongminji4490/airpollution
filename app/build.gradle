@@ -76,4 +76,24 @@ dependencies {
     implementation "androidx.compose.runtime:runtime-livedata:1.3.3"
     annotationProcessor "androidx.room:room-compiler:2.5.0"
     kapt "androidx.room:room-compiler:2.5.0"
+
+    // LiveData
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    // ViewModel utilities for Compose
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+
+    // DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-compose:2.5.3"
+
+    // WorkManager
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:2.8.0"
 }
