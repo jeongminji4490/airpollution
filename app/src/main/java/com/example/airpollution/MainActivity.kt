@@ -2,42 +2,57 @@ package com.example.airpollution
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.airpollution.screen.MainScreen
+import com.example.airpollution.screen.SetLocationScreen
 
 class MainActivity : AppCompatActivity() {
 
-    val SERVICE_KEY=BuildConfig.apiKey
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        CoroutineScope(Dispatchers.Main).launch {
-            getLogs()
+        setContent {
+            val navController = rememberNavController()
+            val appState = MainAppState(navController)
+            MaterialTheme {
+                NavigationComponent(
+                    navController,
+                    appState
+                )
+            }
         }
     }
 
-    private suspend fun getLogs() {
-        try {
-            val response = NetworkClient.apiService.getData(
-                "2022",
-                1,
-                10,
-                "json",
-                SERVICE_KEY,
-                "PM25"
-            )
-            if (response.isSuccessful) {
-                response.body().let {
-                    it?.response?.body?.items?.get(1)?.let { it1 -> Log.e("try", it1.districtName) }
-                }
-            }else {
-                Log.e("Result", response.message())
+    @Composable
+    fun NavigationComponent(
+        navController: NavHostController,
+        appState: MainAppState
+    ) {
+        val context = LocalContext.current
+        val dataStore = StoreDistrictName(context)
+        var startDestination by remember { mutableStateOf("") }
+
+        val settingValue = dataStore.settingValue.collectAsState(initial = false).value
+        startDestination = if (settingValue) MAIN_SCREEN else SET_LOCATION_SCREEN
+
+        NavHost(
+            navController = navController,
+            startDestination = startDestination
+        ){
+            composable(SET_LOCATION_SCREEN) {
+                SetLocationScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
             }
-        }catch (e: Exception) {
-            Log.e("MainActivity", e.toString())
+            composable(MAIN_SCREEN) {
+                MainScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
+            }
         }
     }
 }
