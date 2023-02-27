@@ -1,15 +1,9 @@
 package com.example.airpollution.workers
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
 import android.util.Log
-import androidx.core.app.NotificationCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.example.airpollution.BuildConfig
-import com.example.airpollution.NetworkClient
-import com.example.airpollution.R
 import com.example.airpollution.StoreDistrictName
 import kotlinx.coroutines.flow.first
 import java.time.LocalDateTime
@@ -59,8 +53,6 @@ class Worker(
                         // the job should be executed every 1 hour
                         // check if the new data was created in server in 1 hour
                         if (issueTime.isAfter(oneHourBeforeCurrentTime) || issueTime.isBefore(currentTime)) { // compare time
-                            // val content = "$item.districtName${item.moveName} : ${item.itemCode} ${item.issueGbn}"
-                            // Log.e("content", content)
                             sendNotification(context, content)
                         }
                     }

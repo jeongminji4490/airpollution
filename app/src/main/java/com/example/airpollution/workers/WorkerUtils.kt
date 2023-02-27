@@ -10,7 +10,6 @@ import com.example.airpollution.NetworkClient
 import com.example.airpollution.R
 import com.example.airpollution.api.model.AirPollution
 import retrofit2.Response
-import java.time.LocalTime
 
 fun sendNotification(
     context: Context, content: String
@@ -41,9 +40,9 @@ fun sendNotification(
 
 suspend fun getRemoteData(): List<AirPollution.Response.Body.Item>?  {
 
-    val serviceKey = BuildConfig.apiKey
+    val serviceKey: String = BuildConfig.apiKey
 
-    val response = NetworkClient.apiService.getData(
+    val response: Response<AirPollution> = NetworkClient.apiService.getData(
         "2023",
         1,
         10,
@@ -52,7 +51,6 @@ suspend fun getRemoteData(): List<AirPollution.Response.Body.Item>?  {
     )
 
     val result: List<AirPollution.Response.Body.Item>? = try {
-        Log.e("WorkerUtils", "in try")
         response.body()?.response?.body?.items
     } catch (e: NumberFormatException) {
         Log.e("WorkerUtils", e.toString())

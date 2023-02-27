@@ -12,7 +12,6 @@ interface ApiService {
         @Query("pageNo") pageNo: Int,
         @Query("numOfRows") numOfRows: Int,
         @Query("returnType") returnType: String,
-        @Query("serviceKey") serviceKey: String,
-        @Query("itemCode") itemCode: String
+        @Query("serviceKey") serviceKey: String
     ): Response<AirPollution>
 }

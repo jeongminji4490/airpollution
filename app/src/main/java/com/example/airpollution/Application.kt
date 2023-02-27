@@ -5,6 +5,7 @@ import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.example.airpollution.workers.Worker
 import java.util.concurrent.TimeUnit
 
 class Application() : Application() {
@@ -21,7 +22,7 @@ class Application() : Application() {
             .build()
 
         // run job every 1 hour (15 minutes for test)
-        val requestConstraint  = PeriodicWorkRequestBuilder<Worker>(15, TimeUnit.MINUTES)
+        val requestConstraint  = PeriodicWorkRequestBuilder<Worker>(1, TimeUnit.HOURS)
             .setConstraints(constraints)
             .build()
 
