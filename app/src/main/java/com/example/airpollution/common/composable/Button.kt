@@ -1,31 +1,33 @@
 package com.example.airpollution.common.composable
 
-import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun BasicButton(
-    @StringRes text: Int,
-    modifier: Modifier,
+    text: String,
     backgroundColor: Color,
     contentColor: Color,
-    action: () -> Unit) {
+    action: () -> Unit
+) {
     Button(
         onClick = action,
-        modifier = modifier,
-        elevation = null,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = backgroundColor,
-            contentColor = contentColor)
+            contentColor = contentColor
+        )
     ) {
-        Text(
-            text = stringResource(text),
-            fontSize = 17.sp
+        BasicText(
+            text = text,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(15.dp)
         )
     }
 }
+

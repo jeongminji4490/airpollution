@@ -2,19 +2,15 @@ package com.example.airpollution.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.airpollution.StoreDistrictName
-import com.example.airpollution.common.theme.white
+import com.example.airpollution.common.composable.BasicText
 
 @Composable
 fun MainScreen(
@@ -28,7 +24,7 @@ fun MainScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(white)
+            .background(Color.White)
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -36,23 +32,13 @@ fun MainScreen(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(
+            BasicText(
                 text = districtName.value,
-                modifier = Modifier
-                    .padding(15.dp),
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                fontFamily = FontFamily.Default
+                modifier = Modifier.padding(15.dp)
             )
-            Text(
+            BasicText(
                 text = moveName.value,
-                modifier = Modifier
-                    .padding(15.dp),
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                fontFamily = FontFamily.Default
+                modifier = Modifier.padding(15.dp)
             )
         }
     }
