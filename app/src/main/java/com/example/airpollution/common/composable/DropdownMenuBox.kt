@@ -1,13 +1,14 @@
 package com.example.airpollution.common.composable
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 import com.example.airpollution.*
-import com.example.airpollution.R
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -36,11 +37,15 @@ fun DropDownMenuBox(
                 )
             },
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = colorResource(R.color.sky_blue),
-                unfocusedBorderColor = Color.Black
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color.White
             ),
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            textStyle = TextStyle(
+                color = Color.White
+            ),
+            shape = RoundedCornerShape(12.dp)
         )
         ExposedDropdownMenu(
             expanded = isDropDownMenuExpanded,
@@ -245,7 +250,9 @@ fun DropDownMenuItem(
                     }
                     onChangeIsDropDownMenuExpanded(!state)
                 }) {
-                Text(text = selectedOption)
+                Text(
+                    text = selectedOption
+                )
             }
         }
     }else {

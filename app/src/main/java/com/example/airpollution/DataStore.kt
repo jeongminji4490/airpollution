@@ -51,23 +51,4 @@ class StoreDistrictName (private val context: Context) {
             preferences[moveKey] = moveName
         }
     }
-
-    // if this value is set to true, go to MainScreen directly without setLocationScreen
-    // if user set district name, settingValue is set to true
-    val settingValue: Flow<Boolean> = context.datastore.data
-        .catch { exception ->
-            if (exception is IOException) {
-                emit(emptyPreferences())
-            } else {
-                throw exception
-            }
-        }.map { preferences ->
-            preferences[settingKey] ?: false
-        }
-
-    suspend fun setSettingValue(value: Boolean) {
-        context.datastore.edit { preferences ->
-            preferences[settingKey] = value
-        }
-    }
 }
